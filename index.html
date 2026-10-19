@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ChainGuard - verify where a product really came from</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">ChainGuard</div>
+    <div class="wallet">
+      <span id="roleBadge" class="badge" hidden></span>
+      <span id="account" class="addr">Wallet not connected</span>
+      <button id="connectBtn" type="button">Connect MetaMask</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="verify" aria-labelledby="verifyTitle">
+      <div class="verify-form">
+        <h1 id="verifyTitle">Is this product genuine?</h1>
+        <p class="lede">Enter the product ID from the package. No wallet or gas needed to check.</p>
+        <div class="row">
+          <input id="verifyId" type="number" min="1" placeholder="Product ID, e.g. 101" aria-label="Product ID">
+          <button id="verifyBtn" type="button">Check product</button>
+        </div>
+        <div id="verifyResult" class="result" aria-live="polite"></div>
+      </div>
+      <div id="stamp" class="stamp" hidden></div>
+    </section>
+
+    <section id="timelineWrap" class="timeline-wrap" hidden>
+      <h2>Custody history</h2>
+      <ol id="timeline" class="timeline"></ol>
+      <button id="flagBtn" type="button" class="ghost">Report this product as suspicious</button>
+    </section>
+
+    <section class="actions">
+      <h2>Supply chain actions</h2>
+      <p class="hint">All forms are visible so you can test unauthorised calls too. The contract decides who is allowed.</p>
+      <div class="grid">
+        <form id="roleForm">
+          <h3>Assign role <small>admin</small></h3>
+          <input id="roleAddr" placeholder="Account address 0x..." required>
+          <select id="roleSel">
+            <option value="1">Manufacturer</option>
+            <option value="2">Distributor</option>
+            <option value="3">Retailer</option>
+            <option value="0">Revoke</option>
+          </select>
+          <button type="submit">Assign role</button>
+        </form>
+
+        <form id="regForm">
+          <h3>Register product <small>manufacturer</small></h3>
+          <input id="regId" type="number" min="0" placeholder="Product ID" required>
+          <input id="regName" placeholder="Product name">
+          <input id="regBatch" placeholder="Batch number">
+          <button type="submit">Register product</button>
+        </form>
+
+        <form id="trfForm">
+          <h3>Transfer product <small>current holder</small></h3>
+          <input id="trfId" type="number" min="0" placeholder="Product ID" required>
+          <input id="trfTo" placeholder="Receiver address 0x..." required>
+          <input id="trfLoc" placeholder="Location, e.g. Mumbai warehouse">
+          <button type="submit">Transfer product</button>
+        </form>
+
+        <form id="soldForm">
+          <h3>Mark as sold <small>retailer</small></h3>
+          <input id="soldId" type="number" min="0" placeholder="Product ID" required>
+          <button type="submit">Mark as sold</button>
+        </form>
+      </div>
+      <div id="txStatus" class="tx" aria-live="polite"></div>
+    </section>
+
+    <section class="activity">
+      <h2>Recent on-chain activity <span id="count" class="muted"></span></h2>
+      <ul id="activity" class="activity-list"><li class="muted">Connect a wallet to load events.</li></ul>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.4/ethers.umd.min.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

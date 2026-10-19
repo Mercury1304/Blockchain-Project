@@ -1,0 +1,80 @@
+:root {
+  --paper: #eef2f5;
+  --card: #ffffff;
+  --ink: #12233f;
+  --steel: #55657c;
+  --line: #c9d3de;
+  --ok: #0e7a63;
+  --alert: #b42318;
+  --warn: #9a6700;
+  --accent: #1f4fd8;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 1.05rem/1.55 var(--body); }
+main { max-width: 68rem; margin: 0 auto; padding: 0 1.25rem 4rem; }
+h1, h2, h3, .brand { font-family: var(--display); letter-spacing: -0.01em; margin: 0; }
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.05; }
+h2 { font-size: 1.5rem; margin: 2.5rem 0 0.75rem; }
+h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
+h3 small { font: 400 0.85rem var(--body); color: var(--steel); margin-left: 0.4rem; }
+.muted, .hint { color: var(--steel); }
+
+.top { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: space-between; align-items: center; padding: 0.9rem 1.25rem; background: var(--ink); color: #fff; }
+.brand { font-size: 1.3rem; font-weight: 800; }
+.wallet { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; }
+.addr { font-size: 0.9rem; opacity: 0.85; word-break: break-all; }
+.badge { background: #fff; color: var(--ink); font-weight: 600; font-size: 0.85rem; padding: 0.1rem 0.6rem; border-radius: 99px; }
+
+button, input, select { font: inherit; }
+button { background: var(--accent); color: #fff; border: 0; border-radius: 6px; padding: 0.55rem 1rem; font-weight: 600; cursor: pointer; }
+button:hover { filter: brightness(1.1); }
+button:disabled { opacity: 0.5; cursor: wait; }
+button.ghost { background: transparent; color: var(--alert); border: 1.5px solid var(--alert); margin-top: 1rem; }
+.top button { background: #fff; color: var(--ink); }
+input, select { width: 100%; padding: 0.55rem 0.7rem; border: 1.5px solid var(--line); border-radius: 6px; background: #fff; color: var(--ink); margin-bottom: 0.55rem; }
+:focus-visible { outline: 3px solid #f2b705; outline-offset: 2px; }
+
+.verify { display: grid; grid-template-columns: 1fr minmax(0, 15rem); gap: 2rem; align-items: center; padding: 3rem 0 1rem; }
+.lede { margin: 0.7rem 0 1.2rem; max-width: 34rem; color: var(--steel); }
+.row { display: flex; gap: 0.6rem; max-width: 34rem; }
+.row input { margin: 0; }
+.result { margin-top: 1rem; min-height: 1.5rem; }
+.result dl { display: grid; grid-template-columns: max-content 1fr; gap: 0.2rem 1rem; margin: 0; }
+.result dt { color: var(--steel); }
+.result dd { margin: 0; word-break: break-all; }
+
+/* The one memorable element: an ink stamp that lands on the page. */
+.stamp { justify-self: center; width: 13rem; height: 13rem; border: 5px double currentColor; border-radius: 50%; display: grid; place-content: center; text-align: center; font: 800 1.35rem/1.15 var(--display); transform: rotate(-9deg); padding: 1rem; animation: thud 0.35s ease-out; }
+.stamp.ok { color: var(--ok); }
+.stamp.bad { color: var(--alert); }
+.stamp.warn { color: var(--warn); }
+.stamp small { display: block; font: 600 0.8rem var(--body); margin-top: 0.3rem; }
+@keyframes thud { from { transform: rotate(-9deg) scale(1.5); opacity: 0; } to { transform: rotate(-9deg) scale(1); opacity: 1; } }
+
+.timeline { list-style: none; margin: 0; padding: 0 0 0 1.2rem; border-left: 3px solid var(--line); }
+.timeline li { position: relative; padding: 0 0 1.1rem 1rem; }
+.timeline li::before { content: ""; position: absolute; left: -1.7rem; top: 0.45rem; width: 0.8rem; height: 0.8rem; border-radius: 50%; background: var(--ok); border: 2px solid var(--paper); }
+.timeline .where { font-weight: 600; }
+.timeline .meta { color: var(--steel); font-size: 0.9rem; word-break: break-all; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; margin-top: 1rem; }
+form { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 1rem; }
+form button { width: 100%; }
+
+.tx { margin-top: 1rem; padding: 0.7rem 1rem; border-radius: 6px; background: var(--card); border-left: 5px solid var(--line); min-height: 2.8rem; word-break: break-all; }
+.tx.ok { border-color: var(--ok); }
+.tx.bad { border-color: var(--alert); }
+.tx.pending { border-color: var(--warn); }
+
+.activity-list { list-style: none; margin: 0; padding: 0; }
+.activity-list li { padding: 0.5rem 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; word-break: break-all; }
+
+@media (max-width: 720px) {
+  .verify { grid-template-columns: 1fr; padding-top: 2rem; }
+  .stamp { width: 10rem; height: 10rem; font-size: 1.1rem; }
+  .row { flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) { .stamp { animation: none; } }
